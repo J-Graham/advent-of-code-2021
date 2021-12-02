@@ -48,3 +48,4 @@ Thumbs.db
 
 #Typedoc
 docs/
+.nyc_output

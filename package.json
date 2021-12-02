@@ -8,7 +8,7 @@
         "test": "jasmine-ts --config=jasmine.json",
         "test:watch:setup": "jasmine-ts  --config=./jasmine.json",
         "test:watch": "nodemon --ext ts --exec \"npm run test:watch:setup\"",
-        "test:wc": "nyc jasmine --config=jasmine.json"
+        "test:wc": "nyc -r text -e .ts -x \"**/*.spec.ts\" npm run test"
     },
     "devDependencies": {
         "@types/jasmine": "^3.5.12",
