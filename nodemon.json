@@ -1,0 +1,10 @@
+{
+    "watch": [
+        "."
+    ],
+    "ext": "ts",
+    "ignore": [
+        "src/**/*.spec.ts"
+    ],
+    "exec": "ts-node release-automation/generate-release.ts"
+}
