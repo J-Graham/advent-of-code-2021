@@ -29,7 +29,7 @@ export default class GroupIncrementer {
     }
 
     static outputIncreases(): void {
-        const measurements = FileParser.parseFile('./Day_1/Problem_2/model.txt');
+        const measurements = FileParser.parseFileToInt('./Day_1/Problem_2/model.txt');
         measurements.pop();
         console.log(this.countIncreases(measurements));
     }

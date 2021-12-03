@@ -12,7 +12,7 @@ export default class Incrementer {
     }
 
     static outputIncreases(): void {
-        const measurements = FileParser.parseFile('./Day_1/Problem_1/model.txt');
+        const measurements = FileParser.parseFileToInt('./Day_1/Problem_1/model.txt');
         measurements.pop();
         console.log(this.countIncreases(measurements));
     }
