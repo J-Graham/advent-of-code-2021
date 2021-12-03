@@ -35,4 +35,4 @@ export default class GroupIncrementer {
     }
 }
 
-GroupIncrementer.outputIncreases();
+// GroupIncrementer.outputIncreases();

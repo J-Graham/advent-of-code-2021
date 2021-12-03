@@ -29,4 +29,4 @@ export default class PositionCalculatorAim {
     }
 }
 
-PositionCalculatorAim.outputPosition();
+// PositionCalculatorAim.outputPosition();

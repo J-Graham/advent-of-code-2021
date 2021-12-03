@@ -18,4 +18,4 @@ export default class Incrementer {
     }
 }
 
-Incrementer.outputIncreases();
+// Incrementer.outputIncreases();
