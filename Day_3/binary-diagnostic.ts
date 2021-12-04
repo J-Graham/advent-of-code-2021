@@ -5,10 +5,10 @@ export default class BinaryDiagnostic {
     // epsilon is the least common bits
 
     static mapInput(binaryNumbers: string[]): string[] {
-        const mappedBinaries = ['', '', '', '', ''];
+        const mappedBinaries = [];
         binaryNumbers.map((binaryNumber) => {
             for (let i = 0; i < binaryNumber.length; i++) {
-                mappedBinaries[i] += binaryNumber[i];
+                mappedBinaries[i] ? (mappedBinaries[i] += binaryNumber[i]) : (mappedBinaries[i] = binaryNumber[i]);
             }
         });
         return mappedBinaries;
