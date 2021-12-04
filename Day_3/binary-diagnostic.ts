@@ -14,6 +14,58 @@ export default class BinaryDiagnostic {
         return mappedBinaries;
     }
 
+    static getOxygenGenerator(binaries: string[], index = 0): string {
+        if (binaries.length === 1) {
+            return binaries[0];
+        }
+        let mappedBinaries = this.mapInput(binaries);
+        let highestOccurrence = this.getHighestOccurrence(mappedBinaries, index);
+        binaries = binaries.filter((bit) => bit[index] === highestOccurrence);
+        index++;
+        return this.getOxygenGenerator(binaries, index);
+    }
+
+    static getHighestOccurrence(mappedBinaries: string[], index: number): string {
+        const curr = mappedBinaries[index];
+        let { oneCount, zeroCount } = BinaryDiagnostic.getCounts(curr);
+        if (oneCount === zeroCount) {
+            return '1';
+        } else if (oneCount > zeroCount) {
+            return '1';
+        } else {
+            return '0';
+        }
+    }
+
+    private static getCounts(curr: string) {
+        let oneCount = curr.split('').filter((bit) => bit === '1').length;
+        let zeroCount = curr.split('').filter((bit) => bit === '0').length;
+        return { oneCount, zeroCount };
+    }
+
+    static getCo2Scrubber(binaries: string[], index = 0): string {
+        if (binaries.length === 1) {
+            return binaries[0];
+        }
+        let mappedBinaries = this.mapInput(binaries);
+        let lowestOccurrence = this.getLowestOccurrence(mappedBinaries, index);
+        binaries = binaries.filter((bit) => bit[index] === lowestOccurrence);
+        index++;
+        return this.getCo2Scrubber(binaries, index);
+    }
+
+    static getLowestOccurrence(mappedBinaries: string[], index: number): string {
+        const curr = mappedBinaries[index];
+        let { oneCount, zeroCount } = BinaryDiagnostic.getCounts(curr);
+        if (oneCount === zeroCount) {
+            return '0';
+        } else if (oneCount > zeroCount) {
+            return '0';
+        } else {
+            return '1';
+        }
+    }
+
     static getGamma(mappedBinaries: string[]): string {
         let highestOccurance = '';
         for (let i = 0; i < mappedBinaries.length; i++) {
@@ -45,15 +97,23 @@ export default class BinaryDiagnostic {
         return parseInt(binaryNumber, 2);
     }
 
-    static getConsumption(gamma: number, epsilon: number): number {
-        return gamma * epsilon;
+    static getRating(rating1: number, rating2: number): number {
+        return rating1 * rating2;
     }
 
     static outputConsumption(): void {
         const binaries = FileParser.parseFile('./Day_3/model.txt');
         const gamma = this.getGamma(this.mapInput(binaries));
-        console.log('Consumption', this.getConsumption(this.getBinaryDecimal(gamma), this.getBinaryDecimal(this.getEpsilon(gamma))));
+        console.log('Consumption', this.getRating(this.getBinaryDecimal(gamma), this.getBinaryDecimal(this.getEpsilon(gamma))));
+    }
+
+    static outputLifeSupport(): void {
+        const binaries = FileParser.parseFile('./Day_3/model.txt');
+        const oxygen = this.getOxygenGenerator(binaries);
+        const co2 = this.getCo2Scrubber(binaries);
+
+        console.log('Life Support: ', this.getRating(this.getBinaryDecimal(oxygen), this.getBinaryDecimal(co2)));
     }
 }
 
-BinaryDiagnostic.outputConsumption();
+BinaryDiagnostic.outputLifeSupport();

@@ -22,7 +22,52 @@ describe('binary-diagnostic', () => {
     });
 
     it('should return the power consumption from decimal values', () => {
-        const result = BinaryDiagnostic.getConsumption(22, 9);
+        const result = BinaryDiagnostic.getRating(22, 9);
         expect(result).toEqual(198);
+    });
+
+    it('should get the highest occurrence by index', () => {
+        const result = BinaryDiagnostic.getHighestOccurrence(['011', '010', '111', '011', '000'], 0);
+        expect(result).toEqual('1');
+        const result2 = BinaryDiagnostic.getHighestOccurrence(['011', '010', '111', '011', '000'], 1);
+        expect(result2).toEqual('0');
+        const result3 = BinaryDiagnostic.getHighestOccurrence(['011', '010', '111', '010'], 2);
+        expect(result3).toEqual('1');
+    });
+
+    it('should filter down to most common', () => {
+        const result = BinaryDiagnostic.getOxygenGenerator([
+            '00100',
+            '11110',
+            '10110',
+            '10111',
+            '10101',
+            '01111',
+            '00111',
+            '11100',
+            '10000',
+            '11001',
+            '00010',
+            '01010',
+        ]);
+        expect(result).toEqual('10111');
+    });
+
+    it('should filter down to least common', () => {
+        const result = BinaryDiagnostic.getCo2Scrubber([
+            '00100',
+            '11110',
+            '10110',
+            '10111',
+            '10101',
+            '01111',
+            '00111',
+            '11100',
+            '10000',
+            '11001',
+            '00010',
+            '01010',
+        ]);
+        expect(result).toEqual('01010');
     });
 });
