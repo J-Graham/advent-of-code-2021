@@ -1,9 +1,5 @@
 import FileParser from '../libraries/parse-data';
 
-// parse input to array of plots
-// fill an array of plots with the numbers from the input range
-// count how many times multiple plots are made
-
 export default class VentMapper {
     static parseCoords(rawCords: string): number[][][] {
         return rawCords.split('\n').map((a) => a.split(' -> ').map((a) => a.split(',').map(Number)));
@@ -39,17 +35,31 @@ export default class VentMapper {
     static getEnd(line: number[][]): number[] {
         return [Math.max(line[0][0], line[1][0]), Math.max(line[0][1], line[1][1])];
     }
+    static markDiagonals(line: number[][], map: number[][]): number[][] {
+        // move left to right or right to left depending on the difference between the x and y
+        const xDelta = line[0][0] > line[1][0] ? -1 : 1;
+        const yDelta = line[0][1] > line[1][1] ? -1 : 1;
 
-    static markMap(lines: number[][][], map: number[][]): number[][] {
-        lines.forEach((line) => {
-            const start = this.getStart(line);
-            const end = this.getEnd(line);
-            for (let i = start[0]; i <= end[0]; i++) {
-                for (let j = start[1]; j <= end[1]; j++) {
-                    map[i][j]++;
-                }
+        let diagX = line[0][0];
+        let diagY = line[0][1];
+
+        map[diagX][diagY]++;
+        while (diagX != line[1][0] && diagY != line[1][1]) {
+            diagX += xDelta;
+            diagY += yDelta;
+            map[diagX][diagY]++;
+        }
+        return map;
+    }
+    static markMap(line: number[][], map: number[][]): number[][] {
+        const start = this.getStart(line);
+        const end = this.getEnd(line);
+        for (let i = start[0]; i <= end[0]; i++) {
+            for (let j = start[1]; j <= end[1]; j++) {
+                map[i][j]++;
             }
-        });
+        }
+
         return map;
     }
 
@@ -61,12 +71,18 @@ export default class VentMapper {
         const rawCords = FileParser.readFile('Day_5/model.txt');
         const cords = this.parseCoords(rawCords);
         const lines = this.getLines(cords);
-
         const maxVal = this.getMaxValue(lines);
 
         let map = this.getMap(maxVal);
+        cords.forEach((line) => {
+            if (line[0][0] == line[1][0] || line[0][1] == line[1][1]) {
+                map = this.markMap(line, map);
+            } else {
+                map = this.markDiagonals(line, map);
+            }
+        });
 
-        map = this.markMap(lines, map);
+        // map = this.markMap(lines, map);
 
         console.log('At Least two: ', this.getCountCordsMoreThanOne(map));
     }
