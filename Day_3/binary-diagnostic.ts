@@ -115,5 +115,3 @@ export default class BinaryDiagnostic {
         console.log('Life Support: ', this.getRating(this.getBinaryDecimal(oxygen), this.getBinaryDecimal(co2)));
     }
 }
-
-BinaryDiagnostic.outputLifeSupport();
