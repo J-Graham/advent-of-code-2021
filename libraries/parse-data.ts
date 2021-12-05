@@ -14,4 +14,8 @@ export default class FileParser {
         const data = fs.readFileSync(file, 'utf8');
         return data.split('\n');
     }
+
+    static readFile(file: string): any {
+        return fs.readFileSync(file, 'utf8');
+    }
 }

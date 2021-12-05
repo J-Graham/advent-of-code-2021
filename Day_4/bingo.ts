@@ -70,4 +70,4 @@ export default class Bingo {
     }
 }
 
-Bingo.outputScore();
+// Bingo.outputScore();
