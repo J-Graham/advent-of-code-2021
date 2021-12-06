@@ -86,4 +86,4 @@ export default class VentMapper {
         console.log('At Least two: ', this.getCountCordsMoreThanOne(map));
     }
 }
-VentMapper.outputCount();
+// VentMapper.outputCount();
