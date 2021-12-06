@@ -37,9 +37,8 @@ export default class VentMapper {
     }
     static markDiagonals(line: number[][], map: number[][]): number[][] {
         // move left to right or right to left depending on the difference between the x and y
-        const xDelta = line[0][0] > line[1][0] ? -1 : 1;
-        const yDelta = line[0][1] > line[1][1] ? -1 : 1;
-
+        const xDelta = Math.sign(line[1][0] - line[0][0]);
+        const yDelta = Math.sign(line[1][1] - line[0][1]);
         let diagX = line[0][0];
         let diagY = line[0][1];
 
