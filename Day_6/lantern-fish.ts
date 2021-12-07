@@ -63,4 +63,4 @@ export default class LanternFish {
     }
 }
 
-LanternFish.outputSpawn(256);
+// LanternFish.outputSpawn(256);
