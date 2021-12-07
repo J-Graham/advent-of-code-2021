@@ -53,7 +53,6 @@ export default class CrabSub {
         return range.reduce((a, b) => a + b, 0);
     }
 
-    // function that fills array with all numbers in a range
     static fillRange(): number[] {
         const start = Math.min(...CrabSub.uniqueCrabs);
         const end = Math.max(...CrabSub.uniqueCrabs);
