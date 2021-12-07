@@ -20,6 +20,6 @@ describe('crab-sub', () => {
 
     it('should return an the sum of the least hops to centralize the array', () => {
         expect(CrabSub.getUniqueList(mockData)).toEqual(mockUniqueData);
-        expect(CrabSub.getLeastHops(mockUniqueData)).toEqual(37);
+        expect(CrabSub.getLeastHops(mockUniqueData)).toEqual(168);
     });
 });

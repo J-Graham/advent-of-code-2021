@@ -20,10 +20,12 @@ export default class CrabSub {
         });
         return CrabSub.uniqueCrabs;
     }
-
+    static checkIfArrayIsUnique(myArray) {
+        return myArray.length === new Set(myArray).size;
+    }
     static getLeastHops(uniqueCrabs: number[]): number {
         let lastHops: number = 0;
-
+        CrabSub.uniqueCrabs = [...new Set(CrabSub.uniqueCrabs.concat(CrabSub.fillRange()))];
         CrabSub.uniqueCrabs.forEach((crab) => {
             let tempHops = 0;
             uniqueCrabs.forEach((crabHop) => {
@@ -31,9 +33,9 @@ export default class CrabSub {
                     return;
                 }
                 if (CrabSub.dups[crabHop]) {
-                    tempHops += Math.abs(crabHop - crab) * CrabSub.dups[crabHop];
+                    tempHops += this.countSteps(Math.abs(crabHop - crab)) * CrabSub.dups[crabHop];
                 }
-                tempHops += Math.abs(crabHop - crab);
+                tempHops += this.countSteps(Math.abs(crabHop - crab));
             });
             if (tempHops < lastHops || lastHops === 0) {
                 lastHops = tempHops;
@@ -41,6 +43,27 @@ export default class CrabSub {
         });
 
         return lastHops;
+    }
+
+    static countSteps(steps: number): number {
+        const start = 0;
+        const end = steps;
+        let range: number[] = [];
+        for (let i = start; i <= end; i++) {
+            range.push(i);
+        }
+        return range.reduce((a, b) => a + b, 0);
+    }
+
+    // function that fills array with all numbers in a range
+    static fillRange(): number[] {
+        const start = Math.min(...CrabSub.uniqueCrabs);
+        const end = Math.max(...CrabSub.uniqueCrabs);
+        let range: number[] = [];
+        for (let i = start; i <= end; i++) {
+            range.push(i);
+        }
+        return range;
     }
 
     static outputHops(): void {
