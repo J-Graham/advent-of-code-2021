@@ -20,9 +20,7 @@ export default class CrabSub {
         });
         return CrabSub.uniqueCrabs;
     }
-    static checkIfArrayIsUnique(myArray) {
-        return myArray.length === new Set(myArray).size;
-    }
+
     static getLeastHops(uniqueCrabs: number[]): number {
         let lastHops: number = 0;
         CrabSub.uniqueCrabs = [...new Set(CrabSub.uniqueCrabs.concat(CrabSub.fillRange()))];
