@@ -69,4 +69,4 @@ export default class CrabSub {
     }
 }
 
-CrabSub.outputHops();
+// CrabSub.outputHops();
