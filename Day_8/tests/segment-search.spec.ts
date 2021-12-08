@@ -23,4 +23,43 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
         const result = SegmentSearch.getEasySegments();
         expect(result).toEqual(26);
     });
+
+    it('should populate segment 0 when 3 and 2 are compared', () => {
+        SegmentSearch.compareSegments('edb', 'be');
+        const result = SegmentSearch.mapper;
+        expect(result).toEqual({ 0: 'd', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '' });
+    });
 });
+
+// acedgfb
+// eafb
+// dab
+// ab
+
+// ----
+// -  a
+// -  a
+// ffff
+// .  b(a/b)
+// .  b(a/b)
+// ----
+
+// { 0: 'd', 1: 'e', 2: 'a', 3: 'f', 4: '', 5: 'b', 6: ''}
+
+// while any key is empty
+// loop over
+
+// start with 3 to and compare to 2 missing is segment 0
+// compare 3 with the 4 missing is segment 1
+// compare the 4 to 5 and segment 0 the missing is segment 6
+// compare the 4 with 5 again and the extra letter in 4 is 2 segment
+// compare object with 2 and get the 5th segement
+
+// 6 will be the 5 + 1 letter (which will be object 4)
+
+// abcdefg
+// abef
+// abd
+// ab
+
+/// cdfeb fcadb cdfeb cdbaf

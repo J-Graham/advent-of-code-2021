@@ -8,6 +8,7 @@ export default class SegmentSearch {
     static input: string[][];
     static output: string[][];
     static easySegmentCount = [2, 3, 4, 7];
+    static mapper = { 0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '' };
 
     static parseSegment(segment: string = ''): void {
         SegmentSearch.input = [];
