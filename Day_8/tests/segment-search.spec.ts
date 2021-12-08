@@ -24,12 +24,44 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
         expect(result).toEqual(26);
     });
 
-    it('should populate segment 0 when 3 and 2 are compared', () => {
-        SegmentSearch.compareSegments('edb', 'be');
-        const result = SegmentSearch.mapper;
-        expect(result).toEqual({ 0: 'd', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '' });
+    it('should populate all the values that form 1, 4, and 7 ordered', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({ 0: '', 1: 'be', 2: '', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: '' });
     });
+
+    it('should get 0 combination from segment', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseZero(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({ 0: 'bcdefg', 1: 'be', 2: '', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: '' });
+    });
+
+    // it('should popluate segment 6 after comparing 4 and 5 and current map', () => {
+    //     SegmentSearch.getMappingForSegmentTwo('cgeb', ['fdcge', 'fecdb', 'fabcd']);
+    //     const result = SegmentSearch.mapper;
+    //     expect(result).toEqual({ 0: 'd', 1: 'd', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '', 9: '' });
+    // });
 });
+
+// knowns:
+// number 1 = 2, 5
+// number 4 = 1, 2, 3, 5
+// number 7 = 0, 2, 5
+// number 8 = 0, 1, 3, 4, 5, 6
+
+// 0 will contain numbers from 1, 8
+// 2 will contain 7
+
+// number 2 = 0, 2, 3, 4, 6
+
+// unknowns:
+// number 0 = 0, 1, 2, 4, 5, 6
+// number 2 = 0, 2, 3, 4, 6
+// number 3 = 0, 2, 3, 5, 6
+// number 5 = 0, 1, 3, 5, 6
+// number 6 = 0, 1, 3, 4, 5, 6
+// number 9 = 0, 1, 2, 3, 5, 6
 
 // acedgfb
 // eafb
@@ -50,7 +82,6 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 // loop over
 
 // start with 3 to and compare to 2 missing is segment 0
-// compare 3 with the 4 missing is segment 1
 // compare the 4 to 5 and segment 0 the missing is segment 6
 // compare the 4 with 5 again and the extra letter in 4 is 2 segment
 // compare object with 2 and get the 5th segement
