@@ -30,67 +30,77 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
         expect(result).toEqual({ 0: '', 1: 'be', 2: '', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: '' });
     });
 
-    it('should get 0 combination from segment', () => {
+    it('should get 9 combination from segment', () => {
         SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
-        SegmentSearch.parseZero(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseNine(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
         const result = SegmentSearch.digits;
-        expect(result).toEqual({ 0: 'bcdefg', 1: 'be', 2: '', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: '' });
+        expect(result).toEqual({ 0: '', 1: 'be', 2: '', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: 'bcdefg' });
     });
 
-    // it('should popluate segment 6 after comparing 4 and 5 and current map', () => {
-    //     SegmentSearch.getMappingForSegmentTwo('cgeb', ['fdcge', 'fecdb', 'fabcd']);
-    //     const result = SegmentSearch.mapper;
-    //     expect(result).toEqual({ 0: 'd', 1: 'd', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '', 9: '' });
-    // });
+    it('should get 2 combination from segement', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseNine(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseTwo(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({ 0: '', 1: 'be', 2: 'abcdf', 3: '', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: 'bcdefg' });
+    });
+
+    it('should get 3 combination from segment', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseNine(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseTwo(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseThree(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({ 0: '', 1: 'be', 2: 'abcdf', 3: 'bcdef', 4: 'bceg', 5: '', 6: '', 7: 'bde', 8: 'abcdefg', 9: 'bcdefg' });
+    });
+
+    it('should get 5 combination from segment', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseNine(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseTwo(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseThree(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseFive(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({ 0: '', 1: 'be', 2: 'abcdf', 3: 'bcdef', 4: 'bceg', 5: 'cdefg', 6: '', 7: 'bde', 8: 'abcdefg', 9: 'bcdefg' });
+    });
+
+    it('should get 0 and 6 combination from segment', () => {
+        SegmentSearch.getKnowns(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseNine(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseTwo(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseThree(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseFive(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        SegmentSearch.parseSixAndZero(['be', 'cfbegad', 'cbdgef', 'fgaecd', 'cgeb', 'fdcge', 'agebfd', 'fecdb', 'fabcd', 'edb']);
+        const result = SegmentSearch.digits;
+        expect(result).toEqual({
+            0: 'abdefg',
+            1: 'be',
+            2: 'abcdf',
+            3: 'bcdef',
+            4: 'bceg',
+            5: 'cdefg',
+            6: 'acdefg',
+            7: 'bde',
+            8: 'abcdefg',
+            9: 'bcdefg',
+        });
+    });
 });
 
 // knowns:
 // number 1 = 2, 5
 // number 4 = 1, 2, 3, 5
 // number 7 = 0, 2, 5
-// number 8 = 0, 1, 3, 4, 5, 6
-
-// 0 will contain numbers from 1, 8
-// 2 will contain 7
-
-// number 2 = 0, 2, 3, 4, 6
-
-// unknowns:
-// number 0 = 0, 1, 2, 4, 5, 6
-// number 2 = 0, 2, 3, 4, 6
+// number 8 = 0, 1, 2, 3, 4, 5, 6
 // number 3 = 0, 2, 3, 5, 6
 // number 5 = 0, 1, 3, 5, 6
-// number 6 = 0, 1, 3, 4, 5, 6
-// number 9 = 0, 1, 2, 3, 5, 6
 
-// acedgfb
-// eafb
-// dab
-// ab
+// 2 will contain all but 1 from 8
 
-// ----
-// -  a
-// -  a
-// ffff
-// .  b(a/b)
-// .  b(a/b)
-// ----
+// unknowns:
+// number 2 = 0, 2, 3, 4, 6
+// number 0 = 0, 1, 2, 4, 5, 6 (2, not 3)
+// number 6 = 0, 1, 3, 4, 5, 6 (3, not 2)
+// number 9 = 0, 1, 2, 3, 5, 6 (3, no 4)
 
 // { 0: 'd', 1: 'e', 2: 'a', 3: 'f', 4: '', 5: 'b', 6: ''}
-
-// while any key is empty
-// loop over
-
-// start with 3 to and compare to 2 missing is segment 0
-// compare the 4 to 5 and segment 0 the missing is segment 6
-// compare the 4 with 5 again and the extra letter in 4 is 2 segment
-// compare object with 2 and get the 5th segement
-
-// 6 will be the 5 + 1 letter (which will be object 4)
-
-// abcdefg
-// abef
-// abd
-// ab
-
-/// cdfeb fcadb cdfeb cdbaf
