@@ -5,14 +5,20 @@ export default class Dumbo {
     static coordsToReset: number[][] = [];
     static coordsToFlash: number[][] = [];
     static flashes = 0;
+    static syncFlash = false;
+    static stepCount = 0;
 
-    static parsePuzzle(): void {
-        this.dumboMap = FileParser.readFile('./Day_11/model.txt')
-            .split('\n')
-            .map((row) => row.split('').map(Number));
+    static parsePuzzle(testCase = ''): void {
+        this.dumboMap =
+            testCase === ''
+                ? FileParser.readFile('./Day_11/model.txt')
+                      .split('\n')
+                      .map((row) => row.split('').map(Number))
+                : testCase.split('\n').map((row) => row.split('').map(Number));
     }
 
     static step(): void {
+        this.stepCount++;
         for (let i = 0; i < this.dumboMap.length; i++) {
             for (let j = 0; j < this.dumboMap[i].length; j++) {
                 this.dumboMap[i][j]++;
@@ -36,10 +42,12 @@ export default class Dumbo {
             this.flashes++;
             this.dumboMap[this.coordsToReset[i][1]][this.coordsToReset[i][0]] = 0;
         }
+        if (this.coordsToReset.length === this.dumboMap.length * this.dumboMap[0].length) {
+            this.syncFlash = true;
+        }
         this.coordsToReset = [];
     }
 
-    // function that accepts x and y coordinates and increments it's neighbors by 1 including diagonals
     static incrementNeighbors(x: number, y: number): void {
         if (x < 0 || y < 0 || x >= this.dumboMap[0].length || y >= this.dumboMap.length) {
             return;
@@ -85,6 +93,13 @@ export default class Dumbo {
         }
         console.log('flashes', this.flashes);
     }
+
+    static outputSync(): void {
+        this.parsePuzzle();
+        while (!this.syncFlash) {
+            this.step();
+        }
+        console.log('steps', this.stepCount);
+    }
 }
-// 35
-Dumbo.outputMap(100);
+// Dumbo.outputSync();

@@ -1,15 +1,14 @@
 import Dumbo from '../dumbo';
 
-// step
-// increase energy by 1
-// greater then 9 flashes
-// increase all adjacent cells by 1 including diagonals
-// can only flash onces per step
-// if it flashes set it to 0
+const smallSample = `11111
+19991
+19191
+19991
+11111`;
 
 describe('dumbo', () => {
     it('should parse puzzle to 2d array', () => {
-        Dumbo.parsePuzzle();
+        Dumbo.parsePuzzle(smallSample);
         expect(Dumbo.dumboMap).toEqual([
             [1, 1, 1, 1, 1],
             [1, 9, 9, 9, 1],
@@ -21,7 +20,7 @@ describe('dumbo', () => {
 
     describe('after parse', () => {
         beforeEach(() => {
-            Dumbo.parsePuzzle();
+            Dumbo.parsePuzzle(smallSample);
         });
 
         it('should increase all dumbo energy by 1', () => {
@@ -38,7 +37,7 @@ describe('dumbo', () => {
         it('should increment flash when energy above 9', () => {
             Dumbo.flashes = 0;
             Dumbo.step();
-            expect(Dumbo.flashes).toEqual(8);
+            expect(Dumbo.flashes).toEqual(9);
         });
 
         it('should increment all adjacent dumbos', () => {
@@ -51,16 +50,5 @@ describe('dumbo', () => {
                 [1, 1, 1, 1, 1],
             ]);
         });
-        // it('should increment surrounding dumbos when flashing', () => {
-        //     Dumbo.flashes = 0;
-        //     Dumbo.step();
-        //     expect(Dumbo.dumboMap).toEqual([
-        //         [3, 4, 5, 4, 3],
-        //         [4, 0, 0, 0, 4],
-        //         [5, 0, 0, 0, 5],
-        //         [4, 0, 0, 0, 4],
-        //         [3, 4, 5, 4, 3],
-        //     ]);
-        // });
     });
 });
