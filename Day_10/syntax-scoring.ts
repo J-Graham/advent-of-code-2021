@@ -47,7 +47,7 @@ export default class SyntaxScoring {
         ['>', 4],
     ]);
     static parseChunks(): void {
-        this.chunks = FileParser.readFile('./Day_10/model.txt').split('\n');
+        this.chunks = FileParser.readFile('./Day_10/test-model.txt').split('\n');
     }
 
     static findFirstIllegalChars(): string[] {
