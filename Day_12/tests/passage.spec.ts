@@ -3,26 +3,6 @@
 import Passage from '../passage';
 
 describe('passage', () => {
-    it('should parse the input to paths array', () => {
-        Passage.parseInput();
-        expect(Passage.paths).toEqual([
-            ['start', 'A'],
-            ['A', 'start'],
-            ['start', 'b'],
-            ['b', 'start'],
-            ['A', 'c'],
-            ['c', 'A'],
-            ['A', 'b'],
-            ['b', 'A'],
-            ['b', 'd'],
-            ['d', 'b'],
-            ['A', 'end'],
-            ['end', 'A'],
-            ['b', 'end'],
-            ['end', 'b'],
-        ]);
-    });
-
     describe('after parse', () => {
         beforeEach(() => {
             Passage.parseInput();

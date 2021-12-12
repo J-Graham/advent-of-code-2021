@@ -5,7 +5,7 @@ export default class Passage {
     static adjacentMoves = Object.create(null);
     static parseInput(): void {
         this.paths = [];
-        FileParser.readFile('./Day_12/model.txt')
+        FileParser.readFile('./Day_12/test-model.txt')
             .split('\n')
             .map((line) => {
                 const path: string[] = line.split('-');
