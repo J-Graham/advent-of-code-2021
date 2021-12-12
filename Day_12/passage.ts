@@ -5,7 +5,7 @@ export default class Passage {
     static adjacentMoves = Object.create(null);
     static parseInput(): void {
         this.paths = [];
-        FileParser.readFile('./Day_12/test-model.txt')
+        FileParser.readFile('./Day_12/model.txt')
             .split('\n')
             .map((line) => {
                 const path: string[] = line.split('-');
@@ -18,6 +18,8 @@ export default class Passage {
         this.adjacentMoves[from].adjacent.push(to);
     }
     // function that begins at start and returns all the paths to end
+    // small cave once
+    // start and end once
     static findPaths(start: string): number {
         let pathMoves = 0;
         let queue: string[][] = [[start]];
@@ -27,7 +29,15 @@ export default class Passage {
                 if (adj == 'end') {
                     pathMoves += 1;
                 } else if (adj.toLowerCase() == adj) {
-                    if (paths.indexOf(adj) == -1) queue.push([...paths, adj]);
+                    if (paths.indexOf(adj) == -1) {
+                        queue.push([...paths, adj]);
+                    } else if (
+                        adj !== 'start' &&
+                        adj !== 'end' &&
+                        paths.filter((p) => p.toLowerCase() === p).length === new Set(paths.filter((p) => p.toLowerCase() === p)).size
+                    ) {
+                        queue.push([...paths, adj]);
+                    }
                 } else {
                     queue.push([...paths, adj]);
                 }
@@ -35,7 +45,6 @@ export default class Passage {
         }
         return pathMoves;
     }
-
     static outputPaths(): void {
         Passage.parseInput();
         const paths = Passage.findPaths('start');

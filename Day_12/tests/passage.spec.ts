@@ -10,7 +10,7 @@ describe('passage', () => {
         it('should print all traversed paths', () => {
             const expected = Passage.findPaths('start');
 
-            expect(expected).toEqual(10);
+            expect(expected).toEqual(36);
         });
     });
 });
