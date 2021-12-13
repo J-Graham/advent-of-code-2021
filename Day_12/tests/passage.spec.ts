@@ -7,10 +7,10 @@ describe('passage', () => {
         beforeEach(() => {
             Passage.parseInput();
         });
-        it('should print all traversed paths', () => {
-            const expected = Passage.findPaths('start');
+        // it('should print all traversed paths', () => {
+        //     const expected = Passage.findPaths('start');
 
-            expect(expected).toEqual(36);
-        });
+        //     expect(expected).toEqual(36);
+        // });
     });
 });
