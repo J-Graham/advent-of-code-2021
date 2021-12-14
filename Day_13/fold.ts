@@ -5,8 +5,8 @@ export default class Fold {
 
     // function that fills a map of'.'s with a range of x and y coordinates
     public static parseCoords(): number[][] {
-        const coords = FileParser.readFile('./Day_13/model.txt')
-            .split('\n\n')[0]
+        const coords = FileParser.readFile('./Day_13/test-model.txt')
+            .split('\n\r\n')[0]
             .split('\n')
             .map((row) =>
                 row
@@ -18,8 +18,8 @@ export default class Fold {
     }
 
     public static parseFolds(): string[][] {
-        const folds = FileParser.readFile('./Day_13/model.txt')
-            .split('\n\n')[1]
+        const folds = FileParser.readFile('./Day_13/test-model.txt')
+            .split('\n\r\n')[1]
             .split('\n')
             .map((row) => row.trim().replace('fold along ', '').split('='));
         return folds;
@@ -165,8 +165,9 @@ export default class Fold {
                     output += '.';
                 }
             }
-            console.log(output);
+            // console.log(output);
         }
+        console.log(mergedMap);
     }
 }
-Fold.outputActivationCode();
+// Fold.outputActivationCode();
