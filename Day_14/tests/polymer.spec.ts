@@ -46,4 +46,19 @@ describe('polymer', () => {
         let result = Polymer.findDifference(fills);
         expect(result).toEqual(1588);
     });
+
+    // it('should create an object of each iteration', () => {
+    //     const startingPoint = Polymer.parseStartingPoint();
+    //     const pairs = Polymer.parsePairInsertions();
+    //     const result = Polymer.fillPair(startingPoint, pairs);
+    //     expect(result).toEqual({ 0: '' });
+    // });
+    //iterate the object and set a pairs count for each match
+    // get initial counts
+    // break connection to count object
+    // loop over the pairs loaded from the initial pass
+    // count = the count of the pair
+    // subtract the count from the initial count
+    // compare the first letter of the pair and the pair - add to count
+    // compare the pair and the last letter - add to the count
 });
