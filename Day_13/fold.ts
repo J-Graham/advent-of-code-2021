@@ -5,7 +5,7 @@ export default class Fold {
 
     // function that fills a map of'.'s with a range of x and y coordinates
     public static parseCoords(): number[][] {
-        const coords = FileParser.readFile('./Day_13/test-model.txt')
+        const coords = FileParser.readFile('./Day_13/model.txt')
             .split('\n\n')[0]
             .split('\n')
             .map((row) =>
@@ -18,7 +18,7 @@ export default class Fold {
     }
 
     public static parseFolds(): string[][] {
-        const folds = FileParser.readFile('./Day_13/test-model.txt')
+        const folds = FileParser.readFile('./Day_13/model.txt')
             .split('\n\n')[1]
             .split('\n')
             .map((row) => row.trim().replace('fold along ', '').split('='));
@@ -133,5 +133,40 @@ export default class Fold {
         console.log('Dot Count:', dotCount);
         console.log('Count:', count);
     }
+
+    public static outputActivationCode(): void {
+        const coords = Fold.parseCoords();
+        const maxX = Fold.getMaxX(coords);
+        const maxY = Fold.getMaxY(coords);
+        const dots = Fold.fillDots(maxX, maxY);
+        const hashes = Fold.changeDotsToHashes(coords, dots);
+        const folds = Fold.parseFolds();
+        let [top, bottom]: [string[][], string[][]] = [[], []];
+        let [left, right]: [string[][], string[][]] = [[], []];
+        let mergedMap: string[][] = [];
+        for (let i = 0; i < folds.length; i++) {
+            if (folds[i][0] === 'y') {
+                const splitIndex = parseInt(folds[i][1], 10);
+                [top, bottom] = Fold.verticalSplit(splitIndex, i === 0 ? hashes : mergedMap);
+                mergedMap = Fold.flipBottom(bottom, top);
+            } else {
+                const splitIndex = parseInt(folds[i][1], 10);
+                [left, right] = Fold.horizontalSplit(splitIndex, i === 0 ? hashes : mergedMap);
+                mergedMap = Fold.flipRight(right, left, splitIndex);
+            }
+        }
+
+        for (let i = 0; i < mergedMap.length; i++) {
+            let output = '';
+            for (let j = 0; j < mergedMap[i].length; j++) {
+                if (mergedMap[i][j] === '#') {
+                    output += '#';
+                } else {
+                    output += '.';
+                }
+            }
+            console.log(output);
+        }
+    }
 }
-Fold.outputFirstFold();
+Fold.outputActivationCode();
