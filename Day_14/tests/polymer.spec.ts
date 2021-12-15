@@ -47,18 +47,35 @@ describe('polymer', () => {
         expect(result).toEqual(1588);
     });
 
-    // it('should create an object of each iteration', () => {
-    //     const startingPoint = Polymer.parseStartingPoint();
-    //     const pairs = Polymer.parsePairInsertions();
-    //     const result = Polymer.fillPair(startingPoint, pairs);
-    //     expect(result).toEqual({ 0: '' });
-    // });
-    //iterate the object and set a pairs count for each match
-    // get initial counts
-    // break connection to count object
-    // loop over the pairs loaded from the initial pass
-    // count = the count of the pair
-    // subtract the count from the initial count
-    // compare the first letter of the pair and the pair - add to count
-    // compare the pair and the last letter - add to the count
+    it('should get initial object count', () => {
+        const startingPoint = Polymer.parseStartingPoint();
+        const pairs = Polymer.parsePairInsertions();
+        const result = Polymer.getInitialPairCount(startingPoint);
+        expect(result).toEqual({ NN: 1, NC: 1, CB: 1 });
+    });
+
+    it('should increase the count for next match', () => {
+        const startingPoint = Polymer.parseStartingPoint();
+        const pairs = Polymer.parsePairInsertions2();
+        const initial = Polymer.getInitialPairCount(startingPoint);
+        const qty = Polymer.getInitialQuantity(startingPoint);
+        const result = Polymer.fillPair2(initial, qty, pairs, 1);
+
+        expect(result).toEqual({
+            N: 2,
+            C: 2,
+            B: 2,
+            H: 1,
+        });
+    });
+
+    it('should output the difference of the most common and least common pair part2', () => {
+        const startingPoint = Polymer.parseStartingPoint();
+        const pairs = Polymer.parsePairInsertions2();
+        const initial = Polymer.getInitialPairCount(startingPoint);
+        const qty = Polymer.getInitialQuantity(startingPoint);
+        const fills = Polymer.fillPair2(initial, qty, pairs, 10);
+        let result = Polymer.findDifferenceObject(fills);
+        expect(result).toEqual(1588);
+    });
 });
