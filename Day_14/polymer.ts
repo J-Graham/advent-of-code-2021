@@ -3,13 +3,13 @@ import FileParser from '../libraries/parse-data';
 
 export default class Polymer {
     static parseStartingPoint(): string {
-        const data = FileParser.readFile('./Day_14/model.txt').split('\r\n\r\n');
+        const data = FileParser.readFile('./Day_14/test-model.txt').split('\r\n\r\n');
         return data[0];
     }
 
     static parsePairInsertions(): { [key: string]: string } {
         const pairInsertions = Object.create(null);
-        FileParser.readFile('./Day_14/model.txt')
+        FileParser.readFile('./Day_14/test-model.txt')
             .split('\r\n\r\n')[1]
             .split('\r\n')
             .map((line) => {
@@ -55,12 +55,13 @@ export default class Polymer {
         const pairs = Polymer.parsePairInsertions();
         let fills = Polymer.fillPair(startingPoint, pairs);
 
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 39; i++) {
             fills = Polymer.fillPair(fills, pairs);
+            console.log(fills.length);
         }
         let result = Polymer.findDifference(fills);
         console.log('result', result);
     }
 }
 
-Polymer.outputDifference();
+// Polymer.outputDifference();
