@@ -137,4 +137,4 @@ export default class Polymer {
     }
 }
 
-Polymer.outputDifference2();
+// Polymer.outputDifference2();
