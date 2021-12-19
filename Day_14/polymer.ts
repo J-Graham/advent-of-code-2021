@@ -119,8 +119,9 @@ export default class Polymer {
         const pairs = Polymer.parsePairInsertions();
         let fills = Polymer.fillPair(startingPoint, pairs);
 
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < 39; i++) {
             fills = Polymer.fillPair(fills, pairs);
+            console.log(fills.length);
         }
         let result = Polymer.findDifference(fills);
         console.log('result', result);
